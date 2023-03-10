@@ -32,16 +32,18 @@ double expn(double x, uint16_t count) {
 
 double sinn(double x, uint16_t count) {
     double result = 0.0;
-    for (uint16_t n = 0; n <= count; n++) {
-        result += ((n % 2 == 0) ? 0 : ((n % 4 == 1) ? 1 : -1)) * calcItem(x, 2 * n + 1);
+    for (uint16_t n = 0; n < count; n++) {
+        result += ((n % 2 == 0) ? 0 : ((n % 4 == 1) ? 1 : -1)) *
+            calcItem(x, 2 * n + 1);
     }
     return result;
 }
 
 double cosn(double x, uint16_t count) {
     double result = 0.0;
-    for (uint16_t n = 0; n <= count; n++) {
-        result += ((n % 2 == 0) ? 1 : ((n % 4 == 2) ? -1 : 1)) * calcItem(x, 2 * n);
+    for (uint16_t n = 0; n < count; n++) {
+        result += ((n % 2 == 0) ? 1 : ((n % 4 == 2) ? 1 : -1)) *
+            calcItem(x, 2 * n);
     }
     return result;
 }
