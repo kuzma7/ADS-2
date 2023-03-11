@@ -2,19 +2,25 @@
 #include <cstdint>
 #include "alg.h"
 double pown(double value, uint16_t n) {
-    double result = 1.0;
-    for (uint16_t i = 0; i < n; i++) {
-        result *= value;
+    if (n == 0) {
+        return 1;
     }
-    return result;
+    else {
+        double num = 1;
+        for (uint16_t i = 1; i <= n; i++) {
+            num = value * num;
+        }
+        return num;
+    }
 }
 
 uint64_t fact(uint16_t n) {
-    uint64_t result = 1;
-    for (uint16_t i = 2; i <= n; i++) {
-        result *= i;
+    if (n == 0) {
+        return 1;
     }
-    return result;
+    else {
+        return n * fact(n - 1);
+    }
 }
 
 double calcItem(double x, uint16_t n) {
@@ -22,27 +28,25 @@ double calcItem(double x, uint16_t n) {
 }
 
 double expn(double x, uint16_t count) {
-    double result = 1.0;
-    for (uint16_t n = 1; n <= count; n++) {
-        result += calcItem(x, n);
+    double result = 1;
+    for (uint16_t i = 1; i <= count; i++) {
+        result += calcItem(x, i);
     }
     return result;
 }
 
 double sinn(double x, uint16_t count) {
-    double result = 0.0;
-    for (uint16_t n = 0; n < count; n++) {
-        result += ((n % 2 == 0) ? 0 : ((n % 4 == 1) ? 1 : -1)) *
-            calcItem(x, 2 * n + 1);
+    double result = x;
+    for (uint16_t i = 2; i <= count; i++) {
+        result = result + calcItem(x, 2 * i - 1) * pown(-1, i - 1);
     }
     return result;
 }
 
 double cosn(double x, uint16_t count) {
-    double result = 0.0;
-    for (uint16_t n = 0; n < count; n++) {
-        result += ((n % 2 == 0) ? 1 : ((n % 4 == 2) ? 1 : -1)) *
-            calcItem(x, 2 * n);
+    double result = 1;
+    for (uint16_t i = 2; i <= count; i++) {
+        result = result + calcItem(x, 2 * i - 2) * pown(-1, i - 1);
     }
     return result;
 }
